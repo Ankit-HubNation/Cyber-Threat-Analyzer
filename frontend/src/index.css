@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-bg: #030712;
+  --color-cyber-card: #0b1120;
+  --color-cyber-border: #1e293b;
+  --color-cyber-primary: #06b6d4;
+  --color-cyber-primary-glow: rgba(6, 182, 212, 0.15);
+  --color-cyber-success: #10b981;
+  --color-cyber-warning: #f59e0b;
+  --color-cyber-danger: #ef4444;
+  
+  --font-mono: "Fira Code", "Courier New", Courier, monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-cyber-bg);
+    color: #e2e8f0;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom Cyber Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #030712;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4;
+  }
+}
+
+/* Custom premium cyber grid background */
+.cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(30, 41, 59, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
+  background-position: center;
+}
+
+/* Scanner line scanning effect */
+.scan-line {
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 182, 212, 0) 0%,
+    rgba(6, 182, 212, 0.8) 50%,
+    rgba(6, 182, 212, 0) 100%
+  );
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+/* Radar pulse animation */
+@keyframes pulse-radar {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+}
+
+.radar-glow {
+  animation: pulse-radar 4s infinite ease-in-out;
+}
+
+/* LED Blinkers for status cards */
+.led-blink-red {
+  animation: blink-red 1s infinite alternate;
+}
+.led-blink-yellow {
+  animation: blink-yellow 1s infinite alternate;
+}
+.led-blink-green {
+  animation: blink-green 1s infinite alternate;
+}
+
+@keyframes blink-red {
+  0% { box-shadow: 0 0 4px #ef4444; background-color: #ef4444; }
+  100% { box-shadow: 0 0 12px #ef4444, 0 0 20px #ef4444; background-color: #f87171; }
+}
+
+@keyframes blink-yellow {
+  0% { box-shadow: 0 0 4px #f59e0b; background-color: #f59e0b; }
+  100% { box-shadow: 0 0 12px #f59e0b, 0 0 20px #f59e0b; background-color: #fbbf24; }
+}
+
+@keyframes blink-green {
+  0% { box-shadow: 0 0 4px #10b981; background-color: #10b981; }
+  100% { box-shadow: 0 0 12px #10b981, 0 0 20px #10b981; background-color: #34d399; }
+}
+
+/* Glowing text for terminals */
+.text-glow-cyber {
+  text-shadow: 0 0 8px rgba(6, 182, 212, 0.6);
+}
+
+.text-glow-danger {
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+/* Cyber card borders with cyan corners */
+.cyber-card {
+  position: relative;
+  background-color: var(--color-cyber-card);
+  border: 1px solid var(--color-cyber-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.cyber-card::before, .cyber-card::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--color-cyber-primary);
+  border-style: solid;
+  pointer-events: none;
+}
+
+/* Border corners styling */
+.cyber-card-corners::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.cyber-card-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
