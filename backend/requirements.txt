@@ -4,3 +4,5 @@ sqlalchemy
 python-dotenv
 requests
 reportlab
+python-whois
+dnspython
