@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Shield, ShieldAlert, ShieldCheck, Activity, Key, Mail, Info, Database, AlertCircle } from "lucide-react";
 
 const SAMPLES = [
@@ -42,7 +42,7 @@ export default function OsintScanner() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/check-osint", {
+      const response = await api.post("/api/check-osint", {
         email: targetEmail,
         police: policeFields
       });

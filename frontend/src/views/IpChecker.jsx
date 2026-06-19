@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Server, Activity, ShieldAlert, ShieldCheck, MapPin, Globe, Compass, AlertTriangle } from "lucide-react";
 
 const SAMPLES = [
@@ -42,7 +42,7 @@ export default function IpChecker() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/check-ip", {
+      const response = await api.post("/api/check-ip", {
         ip: queryIp,
         police: policeFields
       });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Shield, ShieldAlert, ShieldCheck, Activity, Terminal, AlertTriangle, Link2, Mail, Globe, Server, Key } from "lucide-react";
 
 export default function Dashboard({ setView }) {
@@ -14,10 +14,10 @@ export default function Dashboard({ setView }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const statsResp = await axios.get("http://localhost:8000/api/stats");
+        const statsResp = await api.get("/api/stats");
         setStats(statsResp.data);
 
-        const logsResp = await axios.get("http://localhost:8000/api/logs");
+        const logsResp = await api.get("/api/logs");
         setRecentLogs(logsResp.data.slice(0, 5)); // show latest 5
       } catch (err) {
         console.error("Failed to load dashboard metrics", err);

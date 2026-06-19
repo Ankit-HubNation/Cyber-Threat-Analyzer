@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Mail, Activity, AlertTriangle, ShieldCheck, ShieldAlert, FileText, ArrowRight, CornerDownRight, Server, Shield } from "lucide-react";
 
 const SAMPLE_SPOOFED = `Delivered-To: investigator@police.gov
@@ -69,7 +69,7 @@ export default function EmailAnalyzer() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/analyze-email", {
+      const response = await api.post("/api/analyze-email", {
         headers: headersToScan,
         police: policeFields
       });

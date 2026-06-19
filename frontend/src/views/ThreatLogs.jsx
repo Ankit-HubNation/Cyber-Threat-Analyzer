@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Terminal, Search, Filter, Calendar, Save, Trash2, X, FileText, ChevronRight, Activity, Download } from "lucide-react";
 
 export default function ThreatLogs() {
@@ -28,7 +28,7 @@ export default function ThreatLogs() {
   const fetchLogs = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/api/logs");
+      const response = await api.get("/api/logs");
       setLogs(response.data);
     } catch (err) {
       console.error(err);
@@ -56,7 +56,7 @@ export default function ThreatLogs() {
     if (!selectedLog) return;
     setSavingPoliceFields(true);
     try {
-      const response = await axios.post(`http://localhost:8000/api/logs/${selectedLog.id}/police`, policeFields);
+      const response = await api.post(`/api/logs/${selectedLog.id}/police`, policeFields);
       // Update local state
       setLogs(logs.map(log => 
         log.id === selectedLog.id ? { ...log, ...policeFields } : log
@@ -73,7 +73,7 @@ export default function ThreatLogs() {
   const handleExportPDF = async () => {
     if (!selectedLog) return;
     try {
-      const response = await axios.get(`http://localhost:8000/api/logs/${selectedLog.id}/pdf`, {
+      const response = await api.get(`/api/logs/${selectedLog.id}/pdf`, {
         responseType: 'blob'
       });
       // Create a download link
@@ -95,7 +95,7 @@ export default function ThreatLogs() {
     if (!selectedLog) return;
     setSavingNote(true);
     try {
-      await axios.post(`http://localhost:8000/api/logs/${selectedLog.id}/notes`, {
+      await api.post(`/api/logs/${selectedLog.id}/notes`, {
         analyst_notes: noteText
       });
       // Update local logs list state
@@ -117,7 +117,7 @@ export default function ThreatLogs() {
       return;
     }
     try {
-      await axios.delete(`http://localhost:8000/api/logs/${logId}`);
+      await api.delete(`/api/logs/${logId}`);
       setLogs(logs.filter(log => log.id !== logId));
       if (selectedLog && selectedLog.id === logId) {
         setSelectedLog(null);

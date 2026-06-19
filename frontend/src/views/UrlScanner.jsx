@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Link2, Shield, Activity, ShieldAlert, ShieldCheck, AlertTriangle, ExternalLink, HelpCircle, Lock, Unlock } from "lucide-react";
 
 const SAMPLES = [
@@ -43,7 +43,7 @@ export default function UrlScanner() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/scan-url", {
+      const response = await api.post("/api/scan-url", {
         url: targetUrl,
         police: policeFields
       });

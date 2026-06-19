@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Globe, Activity, ShieldAlert, ShieldCheck, Calendar, Info, Shield, Key } from "lucide-react";
 
 const SAMPLES = [
@@ -43,7 +43,7 @@ export default function DomainLookup() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/domain-info", {
+      const response = await api.post("/api/domain-info", {
         domain: queryDomain,
         police: policeFields
       });
